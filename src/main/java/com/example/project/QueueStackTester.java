@@ -17,11 +17,20 @@ public class QueueStackTester {
     }
     public static <T> void remove(LinkedPQ<T> pq, int p)
     {
-    	for (int i = 0; i < pq.length(); i++) {
+    	LinkedPQ<T> tmp = new LinkedPQ<T>();
+    	int length = pq.length();
+    	
+    	for (int i = 0; i < length; i++) {
     		PQElement<T> x = pq.serve();
     		if (x.p >= p)
-    			pq.enqueue(x.data, x.p);
+    			tmp.enqueue(x.data, x.p);
     	}
+    	int tmpLength = tmp.length();
+    	for (int i = 0; i < tmpLength; i++) {
+    		PQElement<T> x = tmp.serve();
+			pq.enqueue(x.data, x.p);
+    	}
+    	
     }
     public static <T> boolean search(Stack<T> st, T e)
     {
